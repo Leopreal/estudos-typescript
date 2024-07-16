@@ -36,4 +36,46 @@ const fusca = {
     rodas: 4
 };
 console.log(fusca);
-// fusca.rodas = 5
+const coords = {
+    x: 15
+};
+coords.y = 10;
+console.log(coords);
+const leo = {
+    nome: "leo",
+    idade: 19
+};
+const superLeo = {
+    nome: "super leo",
+    idade: 19,
+    superPoderes: ["telepatia", "super força"]
+};
+console.log(leo);
+console.log(superLeo);
+console.log(superLeo.superPoderes[1]);
+const leonardo = {
+    nome: "leo",
+    tipo: "Doze",
+    calibre: 12
+};
+console.log(leonardo);
+// 7 - read-only com arrays
+let meuArray = ["tomate", "laranja", "uva"]; // read-only com array somente de strings
+meuArray.forEach((item) => {
+    console.log("Fruta: " + item);
+});
+meuArray.map((item) => {
+    return `Fruta: ${item}`;
+});
+console.log(meuArray);
+const teste = [1, 2, 3];
+console.log(teste);
+const alguem = ["leo", 19];
+console.log(alguem[0]);
+// read-only com tuplas
+function mostrarValores(numeros) {
+    // numeros[0] = 10
+    console.log(numeros[0]);
+    console.log(numeros[1]);
+}
+mostrarValores([1, 2]);
