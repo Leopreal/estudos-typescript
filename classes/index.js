@@ -41,3 +41,28 @@ class MaquinaMatadora extends Maquinas {
 const destruidos = new MaquinaMatadora("Destruidor", 4);
 console.log(trator);
 console.log(destruidos);
+class anao {
+    constructor(nome) {
+        this.nome = nome;
+    }
+    saudacao() {
+        console.log("executando um metodo em uma classe");
+    }
+}
+const jimmy = new anao("Jimmy");
+console.log(jimmy.nome);
+jimmy.saudacao();
+// metodo this
+class caminhao {
+    constructor(modelo, cavalos) {
+        this.modelo = modelo;
+        this.cavalos = cavalos;
+    }
+    exibirDetalhes() {
+        console.log(`o modelo do caminhao é ${this.modelo} e ele tem ${this.cavalos}`);
+    }
+}
+const caminhao1 = new caminhao("Volvo", 500);
+const caminhao2 = new caminhao("Mercedes", 600);
+caminhao1.exibirDetalhes();
+caminhao2.exibirDetalhes();
