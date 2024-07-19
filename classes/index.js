@@ -66,3 +66,42 @@ const caminhao1 = new caminhao("Volvo", 500);
 const caminhao2 = new caminhao("Mercedes", 600);
 caminhao1.exibirDetalhes();
 caminhao2.exibirDetalhes();
+// getters
+class pessoa {
+    constructor(nome, sobrenome) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+    }
+    get mostrarNome() {
+        return this.nome + " " + this.sobrenome;
+    }
+}
+//get e set não precisam utilizar constructor
+const leonardoPernomian = new pessoa("Leonardo", "Pernomian");
+console.log(leonardoPernomian.nome);
+console.log(leonardoPernomian.mostrarNome);
+// setters
+class Coordenadas {
+    set fillx(x) {
+        if (x === 0) {
+            return;
+        }
+        this.x = x;
+        console.log("x inserido com sucesso");
+    }
+    set filly(y) {
+        if (y === 0) {
+            return;
+        }
+        this.y = y;
+        console.log("y inserido com sucesso");
+    }
+    get pegarcoord() {
+        return `X: ${this.x} Y: ${this.y}`;
+    }
+}
+const minhaCoord = new Coordenadas();
+minhaCoord.fillx = 30;
+minhaCoord.filly = 10;
+console.log(minhaCoord);
+console.log(minhaCoord.pegarcoord);
