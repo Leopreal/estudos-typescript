@@ -35,7 +35,7 @@ console.log(joao)
 
 class Carro {
     nome
-    readonly rodas = 4
+    // readonly rodas = 4
 
     constructor(nome: string) {
         this.nome = nome
@@ -176,3 +176,123 @@ minhaCoord.filly = 10
 console.log(minhaCoord)
 
 console.log(minhaCoord.pegarcoord)
+
+// implements
+
+interface mostraTitulo {
+    TituloItem(): string
+}
+
+class blogPost implements mostraTitulo {
+    title 
+
+    constructor(title: string) {
+        this.title = title
+    }
+
+    TituloItem(): string {
+        return `o titulo do post é ${this.title}`
+    }
+}
+
+const novoPost = new blogPost("ola")
+console.log(novoPost.TituloItem())
+
+// override
+
+class Base {
+    algumMetodo() {
+        console.log("teste")
+    }
+
+}
+
+class Novo extends Base {
+    algumMetodo(): void {
+        console.log("testando 2")
+    }
+}
+
+const meuObjeto = new Novo()
+meuObjeto.algumMetodo()
+
+
+// visibilidade
+
+// PUBLIC: PODE ACESSADO DE QUALQUER LUGAR
+// PROTECTED: ACESSIVAL APENAS A SUBCLASSE DA CLASSE DO METODO
+// PRIVATE: APENAS A CLASSE QUE DECLAROU O METODO PODE ACESSAR
+
+// public
+
+class C {
+    public x = 10
+}
+
+class D extends C {
+    
+}
+
+
+const imprimaC = new C()
+
+const imprimaD = new D()
+
+console.log(imprimaC.x)
+console.log(imprimaD.x)
+
+// protect
+
+class A {
+    protected x = 10
+
+    protected MetodoProtegido(){
+        console.log("este é um metodo protegido")
+    }
+}
+
+class B extends A {
+    mostraX() {
+        console.log(`o x é ${this.x}`)
+    }
+
+    MostraMetodoProtegido() {
+        this.MetodoProtegido()
+    }
+}
+
+const InstanciaX = new B()
+// console.log(mostraX.x)
+InstanciaX.mostraX()
+InstanciaX.MostraMetodoProtegido()
+
+// privado
+
+class ClassePrivada {
+    private nome = "Leozik"
+
+    mostrarNome() {
+        return this.nome
+    }
+
+    private MetodoPrivado() {
+        console.log("este é um metodo privado que só pode ser acessado por outro metodo da classe")
+    }
+
+    MostrarMetodoPrivado() {
+        this.MetodoPrivado()
+    }
+
+}
+
+const TestePrivado = new ClassePrivada()
+
+console.log(TestePrivado.mostrarNome())
+TestePrivado.MostrarMetodoPrivado()
+
+// class classeTeste extends ClassePrivada {
+//     mostrarAlgo() {
+//         this.MetodoPrivado()
+//     }
+// }
+
