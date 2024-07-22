@@ -188,3 +188,64 @@ TestePrivado.MostrarMetodoPrivado();
 //         this.MetodoPrivado()
 //     }
 // }
+// static members
+class StaticMembers {
+    static StaticMethod() {
+        console.log("teste com metodo");
+    }
+}
+StaticMembers.prop = "teste1";
+console.log(StaticMembers.prop);
+StaticMembers.StaticMethod();
+// generic class
+class ClasseGenerica {
+    constructor(primeiro, segundo) {
+        this.primeiro = primeiro;
+        this.segundo = segundo;
+    }
+    get MostrarPrimerio() {
+        return `o primeiro é ${this.primeiro}`;
+    }
+}
+const NovoTeste = new ClasseGenerica("caixa", "surpresa");
+console.log(NovoTeste);
+console.log(NovoTeste.MostrarPrimerio);
+// parameters propriedades
+class PropriedadesComParametros {
+    constructor(nome, idade) {
+        this.nome = nome;
+        this.idade = idade;
+        this.nome = nome;
+        this.idade = idade;
+    }
+    get mostrarIdade() {
+        return this.idade;
+    }
+}
+const novaPessoa = new PropriedadesComParametros("Leo", 19);
+console.log(novaPessoa.nome);
+// console.log(novaPessoa.idade)
+console.log(novaPessoa.mostrarIdade);
+// generic classes
+const Classe1 = class {
+    constructor(nome) {
+        this.nome = nome;
+    }
+};
+const pessoas = new Classe1("leo");
+console.log(pessoas);
+// abstract class
+class ClasseAbstrata {
+}
+// const novoObj = new ClasseAbstrata()
+class ExemploAbstrato extends ClasseAbstrata {
+    constructor(nome) {
+        super();
+        this.nome = nome;
+    }
+    mostrarNome() {
+        console.log(this.nome);
+    }
+}
+const novoExemploAbstrato = new ExemploAbstrato("leo");
+novoExemploAbstrato.mostrarNome();

@@ -296,3 +296,100 @@ TestePrivado.MostrarMetodoPrivado()
 //     }
 // }
 
+// static members
+
+class StaticMembers {
+    static prop = "teste1"
+
+    static StaticMethod() {
+        console.log("teste com metodo")
+    }
+}
+
+console.log(StaticMembers.prop)
+StaticMembers.StaticMethod()
+
+// generic class
+
+class ClasseGenerica<Gen1, Gen2> {
+    primeiro
+    segundo
+
+    constructor(primeiro: Gen1, segundo: Gen2) {
+        this.primeiro = primeiro
+        this.segundo = segundo
+
+    }
+
+    get MostrarPrimerio() {
+        return `o primeiro é ${this.primeiro}`
+    }
+}
+
+const NovoTeste = new ClasseGenerica("caixa","surpresa")
+console.log(NovoTeste)
+console.log(NovoTeste.MostrarPrimerio)
+
+// parameters propriedades
+
+class PropriedadesComParametros {
+    constructor(public nome: string, private idade: number) {
+        this.nome = nome
+        this.idade = idade
+    }
+
+    get mostrarIdade() {
+        return this.idade
+    }
+
+
+
+}
+
+const novaPessoa = new PropriedadesComParametros("Leo", 19)
+
+console.log(novaPessoa.nome)
+// console.log(novaPessoa.idade)
+
+console.log(novaPessoa.mostrarIdade)
+
+// generic classes
+
+const Classe1 = class<Gen1> {
+    nome
+
+    constructor(nome: string) {
+        this.nome = nome
+    }
+}
+
+const pessoas = new Classe1("leo")
+console.log(pessoas)
+
+// abstract class
+
+abstract class ClasseAbstrata { // PARECIDO COM A SINTAXE DA INTERFACE, POREM O ABSTRACT A GNT HERDA
+    abstract mostrarNome(): void
+}
+
+// const novoObj = new ClasseAbstrata()
+
+class ExemploAbstrato extends ClasseAbstrata {
+    nome: string
+
+
+    constructor(nome: string) {
+        super()
+
+        this.nome = nome
+
+    }
+
+    mostrarNome() {
+        console.log(this.nome)
+    }
+}
+
+const novoExemploAbstrato = new ExemploAbstrato("leo")
+
+novoExemploAbstrato.mostrarNome();
