@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import PrimeroComponente from './components/PrimeiroComponente'
+import SegundoComponente from './components/SegundoComponente';
+import Desestruturando from './components/Desestruturando';
+import State from './components/State';
 
 function App() {
   // variaveis
@@ -21,6 +24,9 @@ function App() {
       {estaTrabalhando && (<p>esta trabalhando</p>)}
       <h2>{mostraNome(nome)}</h2>
       <PrimeroComponente />
+      <SegundoComponente nome='Leo'/>
+      <Desestruturando nome='leo2' idade={23} listaNotas={['fazer tal coisa', 'fazer outra coisa']}/>
+      <State />
     </div>
   );
 }
