@@ -1,9 +1,28 @@
-import React from 'react';
+import React, {createContext  } from 'react';
 import './App.css';
+
 import PrimeroComponente from './components/PrimeiroComponente'
+
 import SegundoComponente from './components/SegundoComponente';
-import Desestruturando from './components/Desestruturando';
+
+import Desestruturando, {Categoria} from './components/Desestruturando';
+
 import State from './components/State';
+
+import Contexto from './components/Contexto';
+
+
+ // types
+ type textoOuNulo = string | null
+
+ // context
+ interface Contexto {
+  linguagem: string
+  framework: string
+  projetos: number
+ }
+
+ export const AppContexto = createContext<Contexto | null>(null)
 
 function App() {
   // variaveis
@@ -16,7 +35,20 @@ function App() {
     return `ola ${nome}`
   }
 
+ // type
+ const meuTexto: textoOuNulo = "tem texto"
+ let meuSegundoTexto: textoOuNulo = null
+
+  // meuSegundoTexto = "teste"
+
+  const ValorDoContexto: Contexto = {
+    linguagem: "JS",
+    framework: "react",
+    projetos: 5
+  }
+
   return (
+    <AppContexto.Provider value={ValorDoContexto}>
     <div className="App">
       <h1>typescript com react</h1>
       <h2>Nome: {nome}</h2>
@@ -24,10 +56,32 @@ function App() {
       {estaTrabalhando && (<p>esta trabalhando</p>)}
       <h2>{mostraNome(nome)}</h2>
       <PrimeroComponente />
+
       <SegundoComponente nome='Leo'/>
-      <Desestruturando nome='leo2' idade={23} listaNotas={['fazer tal coisa', 'fazer outra coisa']}/>
+
+      <Desestruturando 
+      nome='leo2' 
+      idade={23} 
+      listaNotas={['fazer tal coisa', 'fazer outra coisa']} 
+      categoria={Categoria.JS}/>
+      <Desestruturando 
+      nome='teste1' 
+      idade={23} 
+      listaNotas={['', 'fazer outra coisa']} 
+      categoria={Categoria.TS}/>
       <State />
+      {
+        meuTexto &&
+        <p>Teste1</p>
+      }
+      {
+        meuSegundoTexto && 
+        <p>teste2</p>
+      }
+      <Contexto />
+      
     </div>
+    </AppContexto.Provider>
   );
 }
 
