@@ -3,7 +3,8 @@
 
 // iniciando o express
 
-import express, {Request, Response} from 'express'
+import { error } from 'console'
+import express, {NextFunction, Request, response, Response} from 'express'
 import { prependOnceListener, resourceUsage } from 'process'
 
 const app = express()
@@ -11,6 +12,14 @@ const app = express()
 // rota com POST
 
 app.use(express.json())
+
+// middleware para todas as rotas
+function mostrarRota(requisicao: Request, resposta: Response, proximo: NextFunction) {
+    console.log(requisicao.path)
+    proximo()
+}
+
+app.use(mostrarRota)
 
 app.get("/", (requisicao, resposta) => {
     return resposta.send('ola')
@@ -96,6 +105,58 @@ app.get("/api/product/:id/review/:reviewId", (requisicao: Request, resposta: Res
 
     return(resposta.send(`acessando a review ${Idreview} do produto ${Idproduto}`))
 
+})
+
+
+// router handler
+
+function getUser(requisicao: Request, resposta: Response) {
+    console.log(`o id do usuario é ${requisicao.params.id}`)
+
+    return resposta.send("usuario encontrado!")
+}
+
+app.get("/api/user/:id", getUser)
+
+// midware
+
+function verificaUsuario(requisicao: Request, resposta: Response, proximo: NextFunction) {
+    if(requisicao.params.id === "1") {
+        console.log("Usuario administrativo!")
+        proximo()
+    } else {
+        console.log("usuario nao adm")
+    }
+}
+
+app.get("/api/user/:id/acess", verificaUsuario, (requisicao: Request, resposta: Response) => {
+    return resposta.json({msg: "bem vindo a central administrativa"})
+})
+
+
+// requisicao e resposta em generics
+
+app.get("/api/user/:id/detalhes/:nome", 
+    (
+        requisiscao: Request<{id: string; nome: string}>, 
+        resposta: Response<{status: boolean}>
+    ) => {
+        console.log(`ID: ${requisiscao.params.id}`)
+        console.log(`nome: ${requisiscao.params.nome}`)
+
+        return resposta.json({status: true})
+
+})
+
+app.get("/api/error", (requisicao: Request, repsosta: Response) => {
+    try {
+        // logica
+        throw new Error("ERRO")
+    } catch (error: any) {
+        repsosta.statusCode = 500
+
+        repsosta.json({mensagem: error.message})
+    }
 })
 
 app.listen(300, () => {
